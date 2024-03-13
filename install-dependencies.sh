@@ -136,7 +136,6 @@ fedora_python3_packages=(
 
 # an associative array from packages to constrains
 declare -A pip_packages=(
-    [scylla-driver]=
     [geomet]="<0.3,>=0.1"
     [traceback-with-variables]=
     [scylla-api-client]=
@@ -332,6 +331,7 @@ elif [ "$ID" = "fedora" ]; then
         pip_constrained_packages="${pip_constrained_packages} ${package}${pip_packages[$package]}"
     done
     pip3 install "$PIP_DEFAULT_ARGS" $pip_constrained_packages
+    pip3 install https://github.com/muzarski/python-driver/archive/refs/heads/keyerror_with_proof.zip
 
     cargo --config net.git-fetch-with-cli=true install cxxbridge-cmd --root /usr/local
     if [ -f "$(node_exporter_fullpath)" ] && node_exporter_checksum; then
